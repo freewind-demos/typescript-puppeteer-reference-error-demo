@@ -7,8 +7,15 @@ async function run() {
 
   await github.open(page);
 
-  await github.waitForPageTitleShown(page);
+  await github.waitForPageTitleShownCorrectly(page);
 
+  try {
+    await github.waitForPageTitleShownWrongly(page);
+  } catch (e) {
+    console.log('Expected error:')
+    console.error(e);
+  }
+  
   await browser.close();
 }
 
